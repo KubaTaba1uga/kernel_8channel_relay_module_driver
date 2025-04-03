@@ -10,6 +10,8 @@ struct irrigation_controller_data {
   struct mutex access_mutex;
   struct gpio_desc *valves[3];
   struct gpio_desc *pump;
+  int current_valve_index;
+  int time_to_water;
 };
 
 #define LKM_PRINT_ERR(pdev, fmt, ...)                                          \

@@ -10,6 +10,7 @@
 
 #include "common.h"
 #include "init_driver.h"
+#include "sysfs.h"
 
 /***************************************************************
  *                        PUBLIC API
@@ -25,12 +26,24 @@ static int irrigation_controller_probe(struct platform_device *pdev) {
     return err;
   }
 
+  struct irrigation_controller_data *data = dev_get_drvdata(&pdev->dev);
+
+  err = irrigation_controller_init_sysfs(data);
+  if (err) {
+    LKM_PRINT_ERR(pdev, "Unable to init sysfs\n");
+    return err;
+  }
+
   dev_info(&pdev->dev, "IRRIGATION_CONTROLLER probed\n");
 
   return 0;
 }
 
 static void irrigation_controller_remove(struct platform_device *pdev) {
+  struct irrigation_controller_data *data = dev_get_drvdata(&pdev->dev);
+
+  irrigation_controller_destroy_sysfs(data);
+
   dev_info(&pdev->dev, "IRRIGATION_CONTROLLER removed\n");
 }
 

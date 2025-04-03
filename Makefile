@@ -14,7 +14,7 @@ STRIP := ${CROSS_COMPILE}strip
 
 PWD            := $(shell pwd)
 obj-m          += ${FNAME_C}.o
-irrigation_controller_driver-objs := main.o init_driver.o
+irrigation_controller_driver-objs := main.o init_driver.o sysfs.o
 
 MYDEBUG ?= n
 DBG_STRIP := y

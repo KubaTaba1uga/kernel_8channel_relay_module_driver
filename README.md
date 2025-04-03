@@ -2,6 +2,10 @@
 
 Change name to irrigation controller
 
+## Usage
+
+/sys/.../valve_index (which valve), /sys/.../open_time (seconds), /sys/.../trigger (write “1” to start).
+
 ## Connections
 
 ```

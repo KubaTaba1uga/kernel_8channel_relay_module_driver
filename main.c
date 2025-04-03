@@ -1,80 +1,61 @@
 /*
- * am2303 driver
+ * 8 realy irrigation driver
  ****************************************************************
  * Brief Description:
- * A simple module which implements driver for AM2303 and some caching
- *  mechanism. AM2303 uses some custom single-bus protocol which requires
- *  that read occurs respecting 2s waiting time. Module implements simple
- *  cache which ensures that reads does not occur more often.
+ * A simple module which implements driver for 8 channel relay for simple
+ *  irrigation system.
  */
 #include <linux/of_device.h>
 #include <linux/platform_device.h>
 
 #include "common.h"
-#include "init_sensor.h"
-#include "receive_data.h"
-#include "set_up_communication.h"
-#include "sysfs.h"
+#include "init_driver.h"
 
 /***************************************************************
  *                        PUBLIC API
  **************************************************************/
-static int am2303_probe(struct platform_device *pdev) {
-  struct am2303_data *data;
+static int irrigation_controller_probe(struct platform_device *pdev) {
   int err;
 
   dev_info(&pdev->dev, "Probing...\n");
 
-  err = am2303_init(pdev);
+  err = irrigation_controller_init(pdev);
   if (err) {
-    LKM_PRINT_ERR(pdev, "Unable to init the driver\n");
+    LKM_PRINT_ERR(pdev, "Unable to init driver\n");
     return err;
   }
 
-  data = platform_get_drvdata(pdev);
-
-  err = am2303_init_sysfs(data);
-  if (err) {
-    LKM_PRINT_ERR(pdev, "Unable to init sysfs\n");
-    return err;
-  }
-
-  dev_info(&pdev->dev, "AM2303 probed\n");
+  dev_info(&pdev->dev, "IRRIGATION_CONTROLLER probed\n");
 
   return 0;
 }
 
-static void am2303_remove(struct platform_device *pdev) {
-  struct am2303_data *data;
-  data = platform_get_drvdata(pdev);
-
-  am2303_destroy_sysfs(data);
-
-  dev_info(&pdev->dev, "AM2303 removed\n");
+static void irrigation_controller_remove(struct platform_device *pdev) {
+  dev_info(&pdev->dev, "IRRIGATION_CONTROLLER removed\n");
 }
 
-static const struct of_device_id am2303_of_match[] = {
+static const struct of_device_id irrigation_controller_of_match[] = {
     {
         // This is a unique value which should match `compatibile` field in
         // overlay.
-        .compatible = "raspberrypi,am2303_device",
+        .compatible = "raspberrypi,irrigation_controller_device",
     },
     {},
 };
-MODULE_DEVICE_TABLE(of, am2303_of_match);
+MODULE_DEVICE_TABLE(of, irrigation_controller_of_match);
 
-static struct platform_driver am2303_driver = {
-    .probe = am2303_probe,
-    .remove_new = am2303_remove,
+static struct platform_driver irrigation_controller_driver = {
+    .probe = irrigation_controller_probe,
+    .remove_new = irrigation_controller_remove,
     .driver =
         {
-            .name = "am2303_gpio",
-            .of_match_table = am2303_of_match,
+            .name = "irrigation_controller_gpio",
+            .of_match_table = irrigation_controller_of_match,
         },
 };
 
-module_platform_driver(am2303_driver);
+module_platform_driver(irrigation_controller_driver);
 
 MODULE_AUTHOR("Jakub Buczynski");
-MODULE_DESCRIPTION("Custom GPIO descriptor-based one-wire driver for AM2303");
+MODULE_DESCRIPTION("Irrigation controller driver");
 MODULE_LICENSE("GPL");

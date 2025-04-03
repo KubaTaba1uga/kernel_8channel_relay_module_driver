@@ -1,4 +1,4 @@
-FNAME_C ?= am2303_driver
+FNAME_C ?= irrigation_controller_driver
 ifeq ($(FNAME_C),)
   $(error ERROR: you Must pass the C file like this: \
   make FNAME_C=csrc-filename-without-.c target-name)
@@ -14,7 +14,7 @@ STRIP := ${CROSS_COMPILE}strip
 
 PWD            := $(shell pwd)
 obj-m          += ${FNAME_C}.o
-am2303_driver-objs := main.o init_sensor.o set_up_communication.o receive_data.o sysfs.o
+irrigation_controller_driver-objs := main.o init_driver.o
 
 MYDEBUG ?= n
 DBG_STRIP := y

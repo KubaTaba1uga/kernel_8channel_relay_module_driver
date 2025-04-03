@@ -85,7 +85,7 @@ static ssize_t set_valve_index(struct device *dev,
 
   // Convert string from userspace to an integer
   ret = kstrtoint(buf, 0, &index);
-  if (ret < 0 || ret > sizeof(data->valves) / sizeof(void *))
+  if (ret < 0 || ret > sizeof(data->valves) / sizeof(void *) - 1)
     return ret;
 
   mutex_lock(&data->access_mutex);

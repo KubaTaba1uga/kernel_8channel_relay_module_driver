@@ -24,10 +24,10 @@ Add the following snippet to `arch/arm64/boot/dts/broadcom/bcm2712-rpi-5-b.dts` 
 ```dts
 	irrigation_controller: irrigation_controller {
 	    compatible = "raspberrypi,irrigation_controller_device";
-	    pump-gpios = <&rp1_gpio 22 GPIO_ACTIVE_HIGH>;
-	    valve1-gpios = <&rp1_gpio 24 GPIO_ACTIVE_HIGH>;
-	    valve2-gpios = <&rp1_gpio 26 GPIO_ACTIVE_HIGH>;
-	    valve3-gpios = <&rp1_gpio 28 GPIO_ACTIVE_HIGH>;
+	    pump-gpios = <&rp1_gpio 25 GPIO_ACTIVE_HIGH>;
+	    valve1-gpios = <&rp1_gpio 8 GPIO_ACTIVE_HIGH>;
+	    valve2-gpios = <&rp1_gpio 7 GPIO_ACTIVE_HIGH>;
+	    valve3-gpios = <&rp1_gpio 1 GPIO_ACTIVE_HIGH>;
 	    status = "okay";
 	};
 ```

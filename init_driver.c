@@ -5,6 +5,20 @@
 #include "common.h"
 #include "init_driver.h"
 
+#include <linux/delay.h> // for msleep()
+
+void drive_gpios_high_for_10s(struct gpio_desc *gpio1,
+                              struct gpio_desc *gpio2) {
+  if (!gpio1 || !gpio2)
+    return;
+
+  gpiod_set_value(gpio1, 1); // Set pin high
+  gpiod_set_value(gpio2, 1); // Set pin high
+  msleep(10000);             // Sleep 2 seconds (2,000 ms)
+  gpiod_set_value(gpio1, 0); // Set pin low
+  gpiod_set_value(gpio2, 0); // Set pin low
+}
+
 int irrigation_controller_init(struct platform_device *pdev) {
   struct irrigation_controller_data *data;
 
@@ -38,6 +52,9 @@ int irrigation_controller_init(struct platform_device *pdev) {
   // This functions sets device data so it can be acessed from anwyehre in this
   //   device ctx.
   platform_set_drvdata(pdev, data);
+
+  drive_gpios_high_for_10s(data->pump, data->valves[0]);
+  drive_gpios_high_for_10s(data->valves[1], data->valves[2]);
 
   return 0;
 }

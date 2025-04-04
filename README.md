@@ -44,10 +44,10 @@ Insert the following into `arch/arm64/boot/dts/broadcom/bcm2712-rpi-5-b.dts`:
 	    valve1-gpios = <&rp1_gpio 10 GPIO_ACTIVE_HIGH>;
 	    valve2-gpios = <&rp1_gpio 9 GPIO_ACTIVE_HIGH>;
 	    valve3-gpios = <&rp1_gpio 11 GPIO_ACTIVE_HIGH>;
-	    valve4-gpios = <&rp1_gpio 25 GPIO_ACTIVE_HIGH>;
-	    valve5-gpios = <&rp1_gpio 8 GPIO_ACTIVE_HIGH>;
-	    valve6-gpios = <&rp1_gpio 7 GPIO_ACTIVE_HIGH>;
-	    valve7-gpios = <&rp1_gpio 1 GPIO_ACTIVE_HIGH>;		
+	    valve4-gpios = <&rp1_gpio 0 GPIO_ACTIVE_HIGH>;
+	    valve5-gpios = <&rp1_gpio 25 GPIO_ACTIVE_HIGH>;
+	    valve6-gpios = <&rp1_gpio 8 GPIO_ACTIVE_HIGH>;
+	    valve7-gpios = <&rp1_gpio 7 GPIO_ACTIVE_HIGH>;		
 	    status = "okay";
 	};
 ```

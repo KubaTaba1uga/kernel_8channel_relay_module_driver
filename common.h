@@ -6,12 +6,12 @@
 #include <linux/types.h>
 
 struct irrigation_controller_data {
-  struct platform_device *pdev;
-  struct mutex access_mutex;
-  struct gpio_desc *valves[3];
-  struct gpio_desc *pump;
-  int current_valve_index;
-  int time_to_water;
+	struct platform_device *pdev;
+	struct mutex access_mutex;
+	struct gpio_desc *valves[6];	// we support maximum 6 valves
+	struct gpio_desc *pump;
+	int current_valve_index;
+	int time_to_water;
 };
 
 #define LKM_PRINT_ERR(pdev, fmt, ...)                                          \

@@ -25,7 +25,7 @@ int irrigation_controller_init(struct platform_device *pdev)
 
 	for (int i = 0; i < sizeof(data->valves) / sizeof(void *); i++) {
 		char buffer[64];
-		snprintf(buffer, sizeof(buffer) / sizeof(char) - 1, "valve%d", i + 1);
+		snprintf(buffer, sizeof(buffer) / sizeof(char), "valve%d", i + 1);
 		data->valves[i] = devm_gpiod_get(&pdev->dev, buffer, GPIOD_OUT_LOW);
 		if (IS_ERR(data->valves[i])) {
 			return dev_err_probe(&pdev->dev, PTR_ERR(data->valves[i]),

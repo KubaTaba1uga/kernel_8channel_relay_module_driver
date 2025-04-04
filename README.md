@@ -23,14 +23,14 @@ A Linux kernel module that implements a GPIO-based irrigation controller driver 
 + (VCC)  -> Pin 2  
 - (GND)  -> Pin 6
 
-Pump     -> Pin 22  
-Valve 1  -> Pin 24  
-Valve 2  -> Pin 26  
-Valve 3  -> Pin 28  
-Valve 4  -> Pin 19  
-Valve 5  -> Pin 21  
-Valve 6  -> Pin 23  
-Valve 7  -> Pin 27  
+Valve 1  -> Pin 19  
+Valve 2  -> Pin 21  
+Valve 3  -> Pin 23  
+Valve 4  -> Pin 27  
+Valve 5  -> Pin 22  
+Valve 6  -> Pin 24  
+Valve 7  -> Pin 26  
+Pump     -> Pin 28  
 ```
 
 ### 2. **Device Tree Overlay**
@@ -40,14 +40,14 @@ Insert the following into `arch/arm64/boot/dts/broadcom/bcm2712-rpi-5-b.dts`:
 ```dts
 	irrigation_controller: irrigation_controller {
 	    compatible = "raspberrypi,irrigation_controller_device";
-	    pump-gpios = <&rp1_gpio 25 GPIO_ACTIVE_HIGH>;
-	    valve1-gpios = <&rp1_gpio 8 GPIO_ACTIVE_HIGH>;
-	    valve2-gpios = <&rp1_gpio 7 GPIO_ACTIVE_HIGH>;
-	    valve3-gpios = <&rp1_gpio 1 GPIO_ACTIVE_HIGH>;
-	    valve4-gpios = <&rp1_gpio 10 GPIO_ACTIVE_HIGH>;
-	    valve5-gpios = <&rp1_gpio 9 GPIO_ACTIVE_HIGH>;
-	    valve6-gpios = <&rp1_gpio 11 GPIO_ACTIVE_HIGH>;
-	    valve7-gpios = <&rp1_gpio 0 GPIO_ACTIVE_HIGH>;		
+	    pump-gpios = <&rp1_gpio 1 GPIO_ACTIVE_HIGH>;
+	    valve1-gpios = <&rp1_gpio 10 GPIO_ACTIVE_HIGH>;
+	    valve2-gpios = <&rp1_gpio 9 GPIO_ACTIVE_HIGH>;
+	    valve3-gpios = <&rp1_gpio 11 GPIO_ACTIVE_HIGH>;
+	    valve4-gpios = <&rp1_gpio 25 GPIO_ACTIVE_HIGH>;
+	    valve5-gpios = <&rp1_gpio 8 GPIO_ACTIVE_HIGH>;
+	    valve6-gpios = <&rp1_gpio 7 GPIO_ACTIVE_HIGH>;
+	    valve7-gpios = <&rp1_gpio 1 GPIO_ACTIVE_HIGH>;		
 	    status = "okay";
 	};
 ```
